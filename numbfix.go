@@ -11,6 +11,7 @@ import (
 const outputExtension string = ".txt"
 
 var rawNumber string
+var argInput string
 var numbersSlice []string
 var indexes []string
 var slicedInput []string
@@ -20,17 +21,28 @@ var generatedNumb string
 
 func main() {
 
-	greetingAndInput()
+	if len(os.Args) < 2 {
+		banner()
+		greetingAndInput()
+	} else {
+		rawNumber = arg()
+	}
 	var filename string = rawNumber + outputExtension
 	numbToSlice(rawNumber)
 	var lenOfX int = len(indexes)
 	numbGenerator(lenOfX)
 	result(filename)
-	fmt.Println("your wordlist file: ", filename)
+
+}
+func arg() (rawNumber string) {
+
+	argInput = os.Args[1]
+	return argInput
+
 }
 
-func greetingAndInput() {
-	fmt.Println("_                 _______  ______   _______ _________         ")
+func banner() {
+	fmt.Println(" _                  _______  ______   _______  _________         ")
 	fmt.Println("( (    /||\\     /|(       )(  ___ \\ (  ____ \\__   __/|\\     /|")
 	fmt.Println("|  \\  ( || )   ( || () () || (   ) )| (    \\/   ) (   ( \\   / )")
 	fmt.Println("|   \\ | || |   | || || || || (__/ / | (__       | |    \\ (_) / ")
@@ -38,6 +50,8 @@ func greetingAndInput() {
 	fmt.Println("| | \\   || |   | || |   | || (  \\ \\ | (         | |    / ( ) \\ ")
 	fmt.Println("| )  \\  || (___) || )   ( || )___) )| )      ___) (___( /   \\ )")
 	fmt.Println("|/    )_)(_______)|/     \\||/ \\___/ |/       \\_______/|/     \\|")
+}
+func greetingAndInput() {
 
 	fmt.Println("\n\n-put 'x' for any unknown digit. e.g: 5639xx14xx21 . ")
 	fmt.Print("\n	-Insert the number: ")
